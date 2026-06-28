@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yarzarnayoo.weather.client.OpenWeatherClient;
 import com.yarzarnayoo.weather.dto.WeatherResponse;
+import com.yarzarnayoo.weather.exception.WeatherApiException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,7 +38,7 @@ public class WeatherService {
             return response;
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse weather data");
+            throw new WeatherApiException("City not found");
         }
     }
 }
