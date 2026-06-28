@@ -1,15 +1,21 @@
 package com.yarzarnayoo.weather.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.yarzarnayoo.weather.dto.WeatherResponse;
+import com.yarzarnayoo.weather.service.WeatherService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/weather")
 public class WeatherController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Weather API is running!";
+    private final WeatherService service;
+
+    public WeatherController(WeatherService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public WeatherResponse getWeather(@RequestParam String city) {
+        return service.getWeather(city);
     }
 }
